@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+
+import Actual from './components/Actual';
+import Yesterday from './components/Yesterday';
+import Tomorrow from './components/Tomorrow';
 
 export const App = () => {
   return (
-    <div>
-      Find me in src/app.js!
-    </div>
+    <main>
+      <Yesterday />
+      <Actual />
+      <Tomorrow />
+    </main>
   )
 }
+
