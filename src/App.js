@@ -1,15 +1,16 @@
 import React from 'react';
 
-import Actual from './components/Actual';
-import Yesterday from './components/Yesterday';
-import Tomorrow from './components/Tomorrow';
+// import Actual from './components/Actual';
+// import Previous from './components/Previous';
+// import Next from './components/Next';
+
+import Weather from './pages/Weather.js';
 
 export const App = () => {
   return (
     <main>
-      <Yesterday />
-      <Actual />
-      <Tomorrow />
+      <Weather />
+      {/* <Bookmarks /> */}
     </main>
   )
 }

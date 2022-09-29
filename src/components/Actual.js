@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components'
 import { API_URL } from 'utils/urls';
 
 const Actual = () => {
@@ -18,20 +19,25 @@ const Actual = () => {
     return <h1>Loading...</h1>
   }
 
+  const WeatherContainer = styled.div`
+    border: 1px solid black;
+    background-color: coral;
+`
+
   return (
-    <div>
+    <WeatherContainer>
       {console.log(weather)}
       <p>{weather.city.name}</p>
       {weather.list.map((w) => (
         <div>
-          <p>Time: {w.dt_txt}</p>
-          <p>Temp: {w.main.temp}</p>
+          <p>{w.dt_txt}</p>
+          <p>Temperature: {w.main.temp}</p>
           <p>Weather: {w.weather[0].main}</p>
           <p>Description: {w.weather[0].description}</p>
         </div>
       ))}
       <p>Today</p>
-    </div>
+    </WeatherContainer>
   )
 }
 
