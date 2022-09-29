@@ -1,0 +1,1 @@
+export const API_URL = 'https://api.openweathermap.org/data/2.5/forecast?lat=59.32718&lon=18.07172&units=metric&APPID=03f905d87366cf6f2d73c99817aed154';
