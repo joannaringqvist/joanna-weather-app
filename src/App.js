@@ -1,17 +1,14 @@
 import React from 'react';
 
-// import Actual from './components/Actual';
-// import Previous from './components/Previous';
-// import Next from './components/Next';
-
 import Weather from './pages/Weather.js';
+import { Main } from './styles/GlobalStyling';
 
 export const App = () => {
   return (
-    <main>
+    <Main>
       <Weather />
       {/* <Bookmarks /> */}
-    </main>
+    </Main>
   )
 }
 

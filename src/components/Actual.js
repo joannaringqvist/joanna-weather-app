@@ -1,42 +1,98 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components'
-import { API_URL } from 'utils/urls';
+import { WiDaySunny, WiCloud, WiDaySnow } from 'react-icons/wi';
 
-const Actual = () => {
-  const [weather, setWeather] = useState([]);
-  const [loading, setLoading] = useState(false);
+const Actual = (props) => {
+  const WeatherContainer = styled.div`
+    @media (min-width: 1025px) {
+      width: 35%;
+    }
+  `
+  const Location = styled.p`
+    margin: 0 0 50px 0;
+    font-size: 1rem;
+  `
+  const DayAndDate = styled.div`
+    text-align: center;
+    margin: 0 0 30px 0;
+  `
+  const Day = styled.p`
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin: 10px 0 3px 0;
+    @media (min-width: 1025px) {
+      font-size: 1.3rem;
+    }
+  `
+  const DateToShow = styled.p`
+    font-weight: 400;
+    font-size: 1.0rem;
+    margin: 0;
+    @media (min-width: 1025px) {
+      font-size: 1rem;
+    }
+  `
+  const Forecast = styled.div`
+    border-bottom: 2px solid #000;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
 
-  useEffect(() => {
-    setLoading(true);
-    fetch(API_URL)
-      .then((res) => res.json())
-      .then((data) => setWeather(data))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
+  `
+  const Temperature = styled.p`
+    font-size: 2.4rem;
+    margin: 0;
+    padding: 0;
+  `
+  const WeatherIcon = styled.span`
+    font-size: 5rem;
+    margin: 0 0 -10px 0;
+    padding: 0 0 -10px 0;
+  `
+  const WeatherDescription = styled.p`
+    margin: -25px 0 0 0;
+    padding: 0;
+  `
 
-  if (loading) {
-    return <h1>Loading...</h1>
+  const weatherToday = props.weather.list.filter((item) => item.dt_txt.includes(props.dayToday));
+
+  if (weatherToday.length === 0) {
+    return <div>tom</div>
   }
 
-  const WeatherContainer = styled.div`
-    border: 1px solid black;
-    background-color: coral;
-`
+  const weekday = new Date(weatherToday[0].dt_txt).toLocaleDateString('en-US', { weekday: 'long' });
+
+  console.log(weatherToday);
+
+  const showWeatherIcon = (weatherToShowIconFor) => {
+    switch (weatherToShowIconFor) {
+      case weatherToShowIconFor === 'Clouds':
+        return <WiCloud />;
+      case weatherToShowIconFor === 'Clear':
+        return <WiDaySunny />;
+      case weatherToShowIconFor === 'Snow':
+        return <WiDaySnow />;
+      default:
+        return <WiCloud />;
+    }
+  }
 
   return (
     <WeatherContainer>
-      {console.log(weather)}
-      <p>{weather.city.name}</p>
-      {weather.list.map((w) => (
-        <div>
-          <p>{w.dt_txt}</p>
-          <p>Temperature: {w.main.temp}</p>
-          <p>Weather: {w.weather[0].main}</p>
-          <p>Description: {w.weather[0].description}</p>
-        </div>
+      <Location>Showing weather for: the Royal Castle, Stockholm</Location>
+      <DayAndDate>
+        <Day>{weekday}</Day>
+        <DateToShow>{props.dayToday}</DateToShow>
+      </DayAndDate>
+      {weatherToday.map((w) => (
+        <Forecast key={w.dt}>
+          <p>{new Date(w.dt_txt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+          <Temperature>{Math.round(w.main.temp)}°C</Temperature>
+          <WeatherIcon>{showWeatherIcon(w.weather[0].main)}</WeatherIcon>
+          <WeatherDescription>{w.weather[0].description}</WeatherDescription>
+        </Forecast>
       ))}
-      <p>Today</p>
     </WeatherContainer>
   )
 }

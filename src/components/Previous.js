@@ -1,11 +1,14 @@
 import React from 'react';
+import { FaArrowLeft } from 'react-icons/fa';
+import { PrevNextContainer, PrevNextArrow, PrevNext } from '../styles/GlobalStyling';
 
-const Yesterday = () => {
+const Previous = () => {
   return (
-    <div>
-      <p>Yesterday</p>
-    </div>
+    <PrevNextContainer>
+      <PrevNextArrow><FaArrowLeft /></PrevNextArrow>
+      <PrevNext>Previous day</PrevNext>
+    </PrevNextContainer>
   )
 }
 
-export default Yesterday;
+export default Previous;
