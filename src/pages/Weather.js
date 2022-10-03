@@ -26,13 +26,7 @@ const Weather = () => {
 
   const today = date || todayObj.toLocaleDateString();
 
-  const changeDayForward = () => {
-    todayObj.setDate(todayObj.getDate() + 1);
-  }
-  console.log(todayObj);
-
   useEffect(() => {
-    // setLoading(true);
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => setWeather(data))
@@ -48,7 +42,7 @@ const Weather = () => {
     <Container>
       <Previous dayToday={today} />
       <Actual weather={weather} dayToday={today} />
-      <Next onClickMethod={changeDayForward} />
+      <Next dayToday={today} />
     </Container>
   )
 }

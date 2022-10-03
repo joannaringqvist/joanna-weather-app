@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components'
-import { WiDaySunny, WiCloud, WiDaySnow } from 'react-icons/wi';
+import { WiDaySunny, WiCloud, WiRain, WiDaySnow } from 'react-icons/wi';
 
 const WeatherContainer = styled.div`
-    @media (min-width: 1025px) {
-      width: 35%;
-    }
-  `
+  @media (min-width: 1025px) {
+    width: 35%;
+  }
+`
 const Location = styled.p`
   margin: 0 0 50px 0;
   font-size: 1rem;
@@ -69,6 +69,8 @@ const Actual = (props) => {
         return <WiCloud />;
       case 'Clear':
         return <WiDaySunny />;
+      case 'Rain':
+        return <WiRain />;
       case 'Snow':
         return <WiDaySnow />;
       default:
