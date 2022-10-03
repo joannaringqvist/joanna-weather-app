@@ -67,11 +67,11 @@ const Actual = (props) => {
 
   const showWeatherIcon = (weatherToShowIconFor) => {
     switch (weatherToShowIconFor) {
-      case weatherToShowIconFor === 'Clouds':
+      case 'Clouds':
         return <WiCloud />;
-      case weatherToShowIconFor === 'Clear':
+      case 'Clear':
         return <WiDaySunny />;
-      case weatherToShowIconFor === 'Snow':
+      case 'Snow':
         return <WiDaySnow />;
       default:
         return <WiCloud />;
