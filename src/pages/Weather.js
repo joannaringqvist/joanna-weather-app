@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
 import { API_URL } from 'utils/urls';
+import { useParams } from 'react-router-dom';
 
 import Actual from '../components/Actual';
 import Previous from '../components/Previous';
@@ -17,10 +18,18 @@ const Container = styled.div`
 `
 
 const Weather = () => {
+  const { date } = useParams();
   const [weather, setWeather] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const today = new Date().toLocaleDateString();
+  const todayObj = new Date();
+
+  const today = date || todayObj.toLocaleDateString();
+
+  const changeDayForward = () => {
+    todayObj.setDate(todayObj.getDate() + 1);
+  }
+  console.log(todayObj);
 
   useEffect(() => {
     // setLoading(true);
@@ -37,9 +46,9 @@ const Weather = () => {
 
   return (
     <Container>
-      <Previous />
+      <Previous dayToday={today} />
       <Actual weather={weather} dayToday={today} />
-      <Next />
+      <Next onClickMethod={changeDayForward} />
     </Container>
   )
 }
